@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Main {
     private static Employee[] employees = new Employee[10];
 
@@ -37,14 +35,18 @@ public class Main {
 
     public static void printEmployees() {
         for (Employee employee : employees) {
-            System.out.println(employee);
+            if (employee != null) {
+                System.out.println(employee);
+            }
         }
     }
 
     public static int calculateTotalMonthlySalary() {
-                int sumSalary = 0;
+        int sumSalary = 0;
         for (Employee employee : employees) {
-            sumSalary += employee.getSalary();
+            if (employee != null) {
+                sumSalary += employee.getSalary();
+            }
         }
         return sumSalary;
     }
@@ -52,9 +54,9 @@ public class Main {
     public static Employee findEmployeeMinSalary() {
         System.out.println("Сотрудник с минимальной зарплатой:");
         Employee result = employees[0];
-        float minSalary = employees[0].getSalary();
+        float minSalary = Float.MAX_VALUE;
         for (Employee employee : employees) {
-            if (employee.getSalary() < minSalary) {
+            if (employee != null & employee.getSalary() < minSalary) {
                 minSalary = employee.getSalary();
                 result = employee;
             }
@@ -65,9 +67,9 @@ public class Main {
     public static Employee findEmployeeMaxSalary() {
         System.out.println("Сотрудник с максимальной зарплатой:");
         Employee result = employees[0];
-        float maxSalary = employees[0].getSalary();
+        float maxSalary = Float.MIN_VALUE;
         for (Employee employee : employees) {
-            if (employee.getSalary() > maxSalary) {
+            if (employee != null & employee.getSalary() > maxSalary) {
                 maxSalary = employee.getSalary();
                 result = employee;
             }
@@ -77,13 +79,20 @@ public class Main {
 
     public static float calculateAverageSalary() {
         System.out.print("Средняя зарплата сотрудников = ");
-        return calculateTotalMonthlySalary() / employees.length;
+        int count = 0;
+        for (Employee employee : employees) {
+            if (employee != null) {
+                count++;
+            }
+        }
+        return calculateTotalMonthlySalary() / count;
     }
 
     public static void printFullName() {
         for (Employee employee : employees) {
-            System.out.println(employee.getFirstName() + " " + employee.getMiddleName() + " " + employee.getLastName());
+            if (employee != null) {
+                System.out.println(employee.getFirstName() + " " + employee.getMiddleName() + " " + employee.getLastName());
+            }
         }
     }
-
 }
